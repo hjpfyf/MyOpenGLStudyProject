@@ -1,43 +1,39 @@
 #pragma once
 
-#include "Types.h"
+#include "CommonTypes.h"
 
-struct UV
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/vec4.hpp"
+
+namespace World
 {
-	float u, v;
-	
-	UV() : u(0.f), v(0.f) {}
-	UV(float u_, float v_) : u(u_), v(v_) {}
-};
+	typedef glm::vec2 _Texcoord;
+	typedef glm::vec3 _Position;
+	typedef glm::vec4 _Color;
+	typedef glm::vec3 _Normal;
 
-struct Vertex2D
-{
-	// [-1.f, 1.f]
-	float x, y;
+	struct Texcoord : _Texcoord
+	{};
 
-	Vertex2D() : x(0.f), y(0.f) {}
-	Vertex2D(float x_, float y_) : x(x_), y(y_) {}
-};
+	struct Position : _Position
+	{};
 
-struct Vertex3D : public Vertex2D
-{
-	float z;
+	struct Color : _Color
+	{};
 
-	Vertex3D() : Vertex2D(), z(0.f) {}
-	Vertex3D(float x_, float y_, float z_) : Vertex2D(x_, y_), z(z_) {}
-};
+	struct Normal : _Normal
+	{};
 
-struct ColorRGB
-{
-	uint8_t r, g, b;
-	
-	ColorRGB() : r(0), g(0), b(0) {}
-	ColorRGB(uint8_t r_, uint8_t g_, uint8_t b_) : r(r_), g(g_), b(b_) {}
-};
+	struct Vertex
+	{
+		Position m_position;
+		Texcoord m_texcoord;
+		Normal m_normal;
+	};
 
-struct ColorRGBA : public ColorRGB
-{
-	uint8_t a;
-	ColorRGBA() : ColorRGB(), a(0) {}
-	ColorRGBA(uint8_t r_, uint8_t g_, uint8_t b_, uint8_t a_) : ColorRGB(r_, g_, b_), a(a_) {}
-};
+	struct Texture
+	{
+		glUint32 m_gl_texture_id;
+	};
+}

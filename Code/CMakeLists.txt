@@ -16,18 +16,22 @@ set(LIBRARY
 	LibraryCode/stb_image.h 
 	LibraryCode/stb_image.cpp)
 
-set(MODEL
+set(WORLD
 	Geometry.h
-	Primitive.h)
+	Primitive.h
+	ModelTypes.h
+	AssimpMeshConverter.h
+	Model.h)
 
 set(COMMON
-	Types.h)
+	CommonTypes.h
+	CommonDefines.h)
 
-add_executable(Client ${CLIENT} ${LIBRARY} ${MODEL} ${COMMON})
+add_executable(Client ${CLIENT} ${LIBRARY} ${WORLD} ${COMMON})
 	
 source_group("Client" FILES ${CLIENT})
 source_group("Library" FILES ${LIBRARY})
-source_group("Model" FILES ${MODEL})
+source_group("World" FILES ${WORLD})
 source_group("Common" FILES ${COMMON})
 
 target_link_libraries(Client glfw3 assimp-vc140-mt)
