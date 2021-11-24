@@ -1,40 +1,21 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-project(OpenGLProject)
+project(LittleBirdRenderEngine)
 
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set(CLIENT_NAME client)
 
-include_directories("../ThirdParty/Include")
-link_directories("../ThirdParty/Library")
-
-set(CLIENT
+set(CLIENT_FILES
 	Main.cpp)
 
-set(LIBRARY 
-	LibraryCode/glad.c 
-	LibraryCode/stb_image.h 
-	LibraryCode/stb_image.cpp)
+add_executable(${CLIENT_NAME} ${CLIENT_FILES})
 
-set(WORLD
-	Geometry.h
-	Primitive.h
-	ModelTypes.h
-	AssimpMeshConverter.h
-	Model.h)
+add_subdirectory(ThirdLibrary/glfw)
+add_subdirectory(ThirdLibrary/stb_image)
+add_subdirectory(ThirdLibrary/glad)
+add_subdirectory(ThirdLibrary/assimp)
 
-set(COMMON
-	CommonTypes.h
-	CommonDefines.h)
-
-add_executable(Client ${CLIENT} ${LIBRARY} ${WORLD} ${COMMON})
-	
-source_group("Client" FILES ${CLIENT})
-source_group("Library" FILES ${LIBRARY})
-source_group("World" FILES ${WORLD})
-source_group("Common" FILES ${COMMON})
-
-target_link_libraries(Client glfw3 assimp-vc140-mt)
+target_link_libraries(${CLIENT_NAME} glfw assimp glad stb_image)
 
 
 

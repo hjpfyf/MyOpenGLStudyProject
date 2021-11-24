@@ -1,6 +1,6 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/vec2.hpp>
+#include "ThirdLibrary/glad/glad.h"
+#include "ThirdLibrary/glfw/include/GLFW/glfw3.h"
+#include "ThirdLibrary/glm/vec2.hpp"
 
 #include <iostream>
 
