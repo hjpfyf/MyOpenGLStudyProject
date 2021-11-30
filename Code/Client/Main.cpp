@@ -1,16 +1,19 @@
-#include "ThirdLibrary/glad/glad.h"
-#include "ThirdLibrary/glfw/include/GLFW/glfw3.h"
-#include "ThirdLibrary/glm/vec2.hpp"
-
-#include <iostream>
+#include "../ThirdLibrary/glad/glad.h"
+#include "../ThirdLibrary/glfw/include/GLFW/glfw3.h"
+#include "../ThirdLibrary/glm/vec2.hpp"
+#include "ClientLog.h"
+INITIALIZE_EASYLOGGINGPP
 
 void FrameBufferChangeSizeCallback(GLFWwindow* window, int width, int height);
 void ProcessInput(GLFWwindow *window);
 
 static const glm::ivec2 DefaultFrameBufferSize(800, 600);
 
-int main()
+int main(int argc, char* argv[])
 {
+	START_EASYLOGGINGPP(argc, argv);
+	ELPP->addFlag(el::LoggingFlag::CreateLoggerAutomatically);
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -23,7 +26,7 @@ int main()
 	GLFWwindow* window = glfwCreateWindow(DefaultFrameBufferSize.x, DefaultFrameBufferSize.y, "LearnOpenGL", NULL, NULL);
 	if (window == NULL)
 	{
-		std::cout << "Failed to create GLFW window" << std::endl;
+		LBLOG(ERROR) << "Failed to create GLFW window";
 		glfwTerminate();
 		return -1;
 	}
@@ -33,7 +36,7 @@ int main()
 	// glad: load all OpenGL function pointers
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
+		LBLOG(ERROR) << "Failed to initialize GLAD";
 		return -1;
 	}
 
@@ -60,8 +63,10 @@ int main()
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 void ProcessInput(GLFWwindow *window)
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if ( glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS )
+	{
 		glfwSetWindowShouldClose(window, true);
+	}
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes

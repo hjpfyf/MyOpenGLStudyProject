@@ -1169,7 +1169,7 @@ if( MSVC )
       set(MSVC_PREFIX "vc150")
     endif()
   endif()
-  set(LIBRARY_SUFFIX "${ASSIMP_LIBRARY_SUFFIX}-${MSVC_PREFIX}-mt" CACHE STRING "the suffix for the assimp windows library")
+  # set(LIBRARY_SUFFIX "${ASSIMP_LIBRARY_SUFFIX}-${MSVC_PREFIX}-mt" CACHE STRING "the suffix for the assimp windows library")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "WindowsStore")
